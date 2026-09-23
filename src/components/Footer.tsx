@@ -31,7 +31,9 @@ const Footer = () => {
     const formData = new FormData(form);
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbwEBFS1KhVVWJo7rJuszEmkDPSVBPfUfuQRL61Aml2k1q_pXzl75VgF4lnooGd-YfDZ/exec', {
+      //await fetch('https://script.google.com/macros/s/AKfycbwEBFS1KhVVWJo7rJuszEmkDPSVBPfUfuQRL61Aml2k1q_pXzl75VgF4lnooGd-YfDZ/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbx6a26o_DO1qTGm43S8F31ireuAht5P3OTO2P0ueK1dnnvomJksmIfm9DI03u_pLOMjeQ/exec', {
+
         method: 'POST',
         body: formData,
         mode: 'no-cors'
