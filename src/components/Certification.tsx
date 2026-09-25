@@ -26,31 +26,31 @@ const Certification = () => {
   const certs: CertItem[] = [
     {
       id: 1,
-      title: "Python Programming Certificate",
-      issuer: "Coursera / University of Michigan",
-      date: "2024",
+      title: "Python for Data Science, AI & Development",
+      issuer: "IBM",
+      date: "2026",
       imgUrl: imgPython,
       pdfUrl: certPython
     },
     {
       id: 2,
-      title: "ISM Code Internal Auditor",
-      issuer: "Maritime Training Center",
-      date: "2023",
+      title: "ISM Code Knowledge HUB",
+      issuer: "International Maritime Training",
+      date: "2026",
       imgUrl: imgIsm,
       pdfUrl: certIsm
     },
     {
       id: 3,
-      title: "Climate Change & Sustainability",
-      issuer: "Environmental Institute",
+      title: "Global Energy and Climate Policy",
+      issuer: "University of London",
       date: "2023",
       imgUrl: imgClimate,
       pdfUrl: certClimate
     },
         {
       id: 4,
-      title: "Autocad",
+      title: "Autocad Certificate of Achievement",
       issuer: "Decimo CAD",
       date: "2019",
       imgUrl: imgAutocad,
