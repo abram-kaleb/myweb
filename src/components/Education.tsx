@@ -1,53 +1,66 @@
 import React from 'react';
 import { Container } from './Layout';
-import { H1, T3 } from './Typography';
 
 const Education = () => {
   const educationData = [
     {
-      period: "September 2023 - Now",
-      institution: "Hochschule Wismar, Rostock",
-      degree: "Master of Operation and Management of Maritime Systems"
+      period: "Sep 2023 - Aug 2026",
+      institution: "Hochschule Wismar",
+      degree: "M.Sc. in Operation and Management of Maritime Systems",
+      url: "https://www.hs-wismar.de"
     },
     {
-      period: "September 2019 - September 2019",
-      institution: "Sepuluh Nopember Institute of Technology",
-      degree: "Bachelor of Marine Engineering (Double Degree)"
+      period: "Sep 2019 - Sep 2023",
+      institution: "Sepuluh Nopember Institute of Technology & Hochschule Wismar",
+      degree: "B.Eng. in Marine Engineering",
+      url: "https://www.its.ac.id"
     }
   ];
 
   return (
-    <section id="education" className="bg-white py-20">
+    <section id="education" className="bg-white py-12 md:py-20 px-4 md:px-0">
       <Container>
-        <H1 className="text-black text-3xl md:text-5xl font-black uppercase tracking-tighter mb-12">
-          Education
-        </H1>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12">
+          {/* Kolom Kiri: Judul Section */}
+          <div className="md:col-span-3">
+            <h2 className="text-[#0066FF] text-xs md:text-sm font-bold uppercase tracking-widest pt-1">
+              EDUCATION
+            </h2>
+          </div>
 
-        <div className="space-y-12">
-          {educationData.map((edu, idx) => (
-            <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-0 items-baseline">
-              {/* Period */}
-              <div className="md:col-span-3">
-                <T3 className="text-gray-500 font-medium text-[12px] uppercase tracking-wide">
-                  {edu.period}
-                </T3>
-              </div>
+          {/* Kolom Kanan: List Pendidikan */}
+          <div className="md:col-span-9 space-y-6 md:space-y-8">
+            {educationData.map((edu, idx) => (
+              <div 
+                key={idx} 
+                className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-6"
+              >
+                {/* Institusi & Gelar (Kiri/Atas) */}
+                <div className="space-y-1">
+                  <h3 className="text-base md:text-[17px] font-bold leading-snug">
+                    <a
+                      href={edu.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#2D3748] hover:text-[#0066FF] transition-colors duration-200"
+                    >
+                      {edu.institution}
+                    </a>
+                  </h3>
+                  <p className="text-[#718096] text-sm md:text-[15px] font-normal">
+                    {edu.degree}
+                  </p>
+                </div>
 
-              {/* Institution */}
-              <div className="md:col-span-4">
-                <T3 className="text-black font-black text-[13px] md:text-[14px] uppercase tracking-tighter">
-                  {edu.institution}
-                </T3>
+                {/* Periode (Kanan/Bawah di HP) */}
+                <div className="sm:text-right shrink-0">
+                  <span className="text-[#A0AEC0] text-xs md:text-sm font-medium tracking-wide font-mono">
+                    {edu.period}
+                  </span>
+                </div>
               </div>
-
-              {/* Degree */}
-              <div className="md:col-span-5">
-                <T3 className="text-gray-600 font-medium text-[13px] leading-snug">
-                  {edu.degree}
-                </T3>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Container>
     </section>

@@ -5,7 +5,7 @@ import Home from './page/Home';
 const App = () => {
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
       <Home />
     </div>
   );

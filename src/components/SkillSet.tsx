@@ -1,62 +1,60 @@
 import React from 'react';
 import { Container } from './Layout';
-import { T3, H1 } from './Typography';
 
-const SkillSet = () => {
-  const skills = [
+const Skills = () => {
+  const skillCategories = [
     {
-      category: "Marine Engineering Systems",
-      items: ["AutoCAD", "Rhino 3D", "Maxsurf", "MATLAB/Simulink"]
+      title: "Engineering",
+      items: ["AutoCAD", "Rhino 3D", "Maxsurf", "SolidWorks"]
     },
     {
-      category: "Digital Twin Architecture",
-      items: ["Python", "SQL", "React", "PLC", "MQTT"]
+      title: "Data Science",
+      items: ["Python", "R", "MATLAB", "SQL"]
     },
     {
-      category: "Data/Algorithms",
-      items: ["Sensor Fusion", "Isolation Forest", "Neural Network"]
-    }
+      title: "AI",
+      items: ["TensorFlow", "PyTorch", "Scikit-learn"]
+    },
   ];
 
   return (
-    <section id="skills" className="bg-white py-20">
+    <section id="skills" className="bg-white py-12 md:py-20 px-4 md:px-0">
       <Container>
-        <H1 className="text-black text-3xl md:text-5xl font-black uppercase tracking-tighter mb-12">
-          Skill Set
-        </H1>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12">
+          {/* Kolom Kiri: Judul Section */}
+          <div className="md:col-span-3">
+            <h2 className="text-[#0066FF] text-xs md:text-sm font-bold uppercase tracking-widest pt-1">
+              SKILLS
+            </h2>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4">
-          {skills.map((group, idx) => (
-            <div key={idx} className="border border-gray-200 flex flex-col h-full">
-              <div className="p-6 border-b border-gray-200 flex-grow-0 min-h-[100px] flex items-center justify-center text-center">
-                <T3 className="text-black font-black text-[11px] uppercase tracking-widest leading-tight">
-                  {group.category}
-                </T3>
-              </div>
+          {/* Kolom Kanan: Grid Kolom Kategori Skills */}
+          <div className="md:col-span-9 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8">
+            {skillCategories.map((group, idx) => (
+              <div key={idx} className="space-y-3">
+                {/* Judul Sub-Kategori */}
+                <h3 className="text-[#2D3748] text-xs md:text-sm font-bold uppercase tracking-wider">
+                  {group.title}
+                </h3>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 flex-grow">
-                {group.items.map((skill, sIdx) => (
-                  <div 
-                    key={sIdx} 
-                    className={`p-4 border-r border-b border-gray-200 flex items-center justify-center text-center last:border-r-0 ${
-                      skill === "MATLAB/Simulink" ? "col-span-2 lg:col-span-1" : ""
-                    }`}
-                  >
-                    <T3 className="text-black font-bold text-[9px] md:text-[10px] uppercase tracking-tighter leading-tight">
+                {/* List Item Skills */}
+                <ul className="space-y-2">
+                  {group.items.map((skill, sIdx) => (
+                    <li 
+                      key={sIdx} 
+                      className="text-[#4A5568] text-sm md:text-[15px] font-normal leading-tight"
+                    >
                       {skill}
-                    </T3>
-                  </div>
-                ))}
-                {[...Array(Math.max(0, 6 - group.items.length))].map((_, i) => (
-                  <div key={`filler-${i}`} className="p-4 border-r border-b border-gray-100 last:border-r-0" />
-                ))}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Container>
     </section>
   );
 };
 
-export default SkillSet;
+export default Skills;

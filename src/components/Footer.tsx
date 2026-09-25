@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from './Layout';
-import { T3 } from './Typography';
 
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,13 +30,15 @@ const Footer = () => {
     const formData = new FormData(form);
 
     try {
-      //await fetch('https://script.google.com/macros/s/AKfycbwEBFS1KhVVWJo7rJuszEmkDPSVBPfUfuQRL61Aml2k1q_pXzl75VgF4lnooGd-YfDZ/exec', {
-        await fetch('https://script.google.com/macros/s/AKfycby1DUCeG8ZDWF0veSWd6_eGtQKg4qLm7cTcdF14PEAOEurpEPsJlYjlkLtGsz2iBNJF/exec', {
-
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors'
-      });
+      await fetch(
+         'https://script.google.com/macros/s/AKfycbx6a26o_DO1qTGm43S8F31ireuAht5P3OTO2P0ueK1dnnvomJksmIfm9DI03u_pLOMjeQ/exec',
+       
+        {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors',
+        }
+      );
       setStatus('success');
       form.reset();
       setTimeout(() => {
@@ -51,12 +52,13 @@ const Footer = () => {
   };
 
   return (
-    <footer id="contact" className="bg-black py-10 border-t border-white/5 relative">
+    <footer id="contact" className="bg-white py-12 md:py-16 border-t border-gray-100 relative">
       <Container>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+          {/* Brand & Social Links */}
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <h2 className="text-xl font-black tracking-tighter uppercase leading-none text-white text-center md:text-left">
-              ABRAM<span className="text-[#F2E500] not-italic">KALEB</span>
+            <h2 className="text-xl font-bold tracking-tight uppercase leading-none text-[#2D3748] text-center md:text-left">
+              Abraham <span className="text-[#0066FF]"> Manulang</span>
             </h2>
             <div className="flex gap-8">
               {socialLinks.map((link) => (
@@ -65,7 +67,7 @@ const Footer = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white text-[10px] font-bold uppercase tracking-widest hover:text-[#F2E500] transition-colors"
+                  className="text-[#718096] text-xs font-bold uppercase tracking-widest hover:text-[#0066FF] transition-colors"
                 >
                   {link.label}
                 </a>
@@ -73,61 +75,83 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Contact Pop-up Container */}
           <div className="relative">
+            {/* Backdrop Modal Mobile */}
             {isOpen && (
               <div
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] lg:hidden animate-in fade-in duration-300"
+                className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[150] lg:hidden animate-in fade-in duration-300"
                 onClick={() => setIsOpen(false)}
               />
             )}
 
-            <div className={`
-              fixed lg:absolute z-[200] bg-white shadow-2xl transition-all duration-500 ease-in-out overflow-hidden
-              inset-x-4 top-1/2 -translate-y-1/2 lg:inset-auto lg:top-auto
-              lg:bottom-0 lg:right-0 lg:translate-y-0 lg:w-[350px]
-              ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}
-            `}>
-              <div className="p-8">
-                <div className="flex justify-between items-center mb-6">
-                  <T3 className="text-black font-black text-[10px] uppercase tracking-widest">
-                    {status === 'success' ? 'Sent to Sheet!' : status === 'error' ? 'Error Occurred' : 'Send Message'}
-                  </T3>
-                  <button onClick={() => setIsOpen(false)} className="text-black text-2xl p-2">&times;</button>
+            {/* Modal Form Pop-up */}
+            <div
+              className={`
+                fixed lg:absolute z-[200] bg-white border border-gray-200 shadow-xl transition-all duration-300 ease-in-out overflow-hidden rounded-lg
+                inset-x-4 top-1/2 -translate-y-1/2 lg:inset-auto lg:top-auto
+                lg:bottom-0 lg:right-0 lg:translate-y-0 lg:w-[360px]
+                ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}
+              `}
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-3">
+                  <span className="text-[#0066FF] font-bold text-xs uppercase tracking-widest">
+                    {status === 'success'
+                      ? 'Sent Successfully!'
+                      : status === 'error'
+                      ? 'Error Occurred'
+                      : 'Send Message'}
+                  </span>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-400 hover:text-black text-xl leading-none"
+                  >
+                    &times;
+                  </button>
                 </div>
 
                 {status === 'success' ? (
-                  <div className="py-10 text-center animate-in fade-in zoom-in">
-                    <div className="text-[#F2E500] text-4xl mb-4">✓</div>
-                    <T3 className="text-black font-bold text-[10px] uppercase tracking-widest">Message sent</T3>
+                  <div className="py-8 text-center animate-in fade-in zoom-in">
+                    <div className="text-[#0066FF] text-3xl mb-2">✓</div>
+                    <span className="text-[#2D3748] font-bold text-xs uppercase tracking-widest">
+                      Message Sent!
+                    </span>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <input type="text" name="honeypot" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+                    <input
+                      type="text"
+                      name="honeypot"
+                      style={{ display: 'none' }}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
                     <input
                       name="name"
                       type="text"
-                      placeholder="NAME"
+                      placeholder="YOUR NAME"
                       required
-                      className="w-full border-b border-gray-100 py-3 text-[10px] font-bold tracking-widest focus:border-black outline-none text-black bg-transparent"
+                      className="w-full border-b border-gray-200 py-2.5 text-xs font-medium tracking-wide focus:border-[#0066FF] outline-none text-[#2D3748] bg-transparent transition-colors placeholder:text-gray-400"
                     />
                     <input
                       name="email"
                       type="email"
-                      placeholder="EMAIL"
+                      placeholder="YOUR EMAIL"
                       required
-                      className="w-full border-b border-gray-100 py-3 text-[10px] font-bold tracking-widest focus:border-black outline-none text-black bg-transparent"
+                      className="w-full border-b border-gray-200 py-2.5 text-xs font-medium tracking-wide focus:border-[#0066FF] outline-none text-[#2D3748] bg-transparent transition-colors placeholder:text-gray-400"
                     />
                     <textarea
                       name="message"
-                      placeholder="MESSAGE"
+                      placeholder="YOUR MESSAGE"
                       rows={4}
                       required
-                      className="w-full border-b border-gray-100 py-3 text-[10px] font-bold tracking-widest focus:border-black outline-none text-black resize-none bg-transparent"
+                      className="w-full border-b border-gray-200 py-2.5 text-xs font-medium tracking-wide focus:border-[#0066FF] outline-none text-[#2D3748] resize-none bg-transparent transition-colors placeholder:text-gray-400"
                     />
                     <button
                       type="submit"
                       disabled={status === 'sending'}
-                      className="w-full bg-black text-white py-5 mt-4 text-[10px] font-black uppercase tracking-widest hover:bg-[#F2E500] hover:text-black transition-all disabled:opacity-50"
+                      className="w-full bg-[#0066FF] text-white py-3.5 mt-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-[#0052CC] transition-all disabled:opacity-50"
                     >
                       {status === 'sending' ? 'Sending...' : 'Submit Message'}
                     </button>
@@ -136,27 +160,18 @@ const Footer = () => {
               </div>
             </div>
 
+            {/* Trigger Button */}
             <button
               onClick={() => setIsOpen(true)}
-              className={`px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 relative z-[90] ${isOpen ? 'opacity-0 pointer-events-none' : 'bg-white text-black hover:bg-[#F2E500]'
-                }`}
+              className={`px-6 py-3.5 border border-[#0066FF] text-[#0066FF] text-xs font-bold uppercase tracking-widest rounded transition-all duration-300 relative z-[90] ${
+                isOpen
+                  ? 'opacity-0 pointer-events-none'
+                  : 'hover:bg-[#0066FF] hover:text-white'
+              }`}
             >
               Send me a message
             </button>
           </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5">
-          <div className="flex gap-4 md:gap-8">
-            {['Imprint', 'Data Protection', 'Privacy Setting'].map((link) => (
-              <T3 key={link} className="text-[7px] md:text-[8px] text-gray-600 font-bold uppercase tracking-widest hover:text-white cursor-pointer transition-colors">
-                {link}
-              </T3>
-            ))}
-          </div>
-          <T3 className="text-[7px] md:text-[8px] text-gray-800 font-bold uppercase tracking-[0.4em] text-center">
-            © {currentYear} — ALL RIGHTS RESERVED
-          </T3>
         </div>
       </Container>
     </footer>

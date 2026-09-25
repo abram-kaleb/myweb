@@ -1,100 +1,119 @@
-import React, { useState, useEffect } from 'react';
-import { T3, H1 } from './Typography';
+import React from 'react';
+import { Container } from './Layout';
+
+// Import Gambar Showcase Project (Ganti dengan path gambar kamu)
+import projectBlistabloc from '../assets/projects/monitor.png';
+import projectScreentime from '../assets/projects/simulator.png';
+import projectDrawing from '../assets/projects/cad.png';
 
 interface ProjectItem {
-  id: string;
-  category: string;
+  id: number;
   title: string;
-  image: string;
-  sideLabel: string;
+  description: string;
+  imageUrl: string;
+  link?: string;
 }
 
-interface ProjectProps {
-  projects: ProjectItem[];
-  activeIndex: number;
-  onSelectProject: (index: number) => void;
-}
-
-const Project = ({ projects, activeIndex, onSelectProject }: ProjectProps) => {
-  const [isTextVisible, setIsTextVisible] = useState(true);
-  const sideColors = ["bg-[#B3B3B3]", "bg-[#2D2D2D]", "bg-[#8B0000]", "bg-[#0A2A43]"];
-
-  const handleProjectClick = (index: number) => {
-    if (index === activeIndex) return;
-    setIsTextVisible(false);
-    onSelectProject(index);
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsTextVisible(true);
-    }, 400);
-    return () => clearTimeout(timer);
-  }, [activeIndex]);
+const Projects = () => {
+  const projects: ProjectItem[] = [
+    {
+      id: 1,
+      title: "MAN 6L 21/30 Digital Twin Monitoring Dashboard",
+      description: "This project is a real-time industrial monitoring dashboard designed for the MAN 6L 21/30 engine. It features an interactive 3D model alongside comprehensive engine telemetry indicators. The interface integrates active alarm tracking, operational health scoring, status analytics, and trend chart visualizations to support predictive maintenance and efficient engine performance monitoring.",
+      imageUrl: projectBlistabloc,
+      link: "https://abram-kaleb.github.io/ackerman2026" // Masukkan URL link proyek di sini
+    },
+    {
+      id: 2,
+      title: "MAN 6L 21/30 Digital Twin Simulation Dashboard",
+      description: "An interactive real-time simulation panel designed to model engine operational metrics under varying loads. By enabling dynamic adjustment of input variables like engine speed and braking power, this dashboard allows testing, predictive modeling, and performance evaluation for industrial engines.",
+      imageUrl: projectScreentime,
+      link: "https://abram-kaleb.github.io/ackerman2026"
+    },
+    {
+      id: 3,
+      title: "Vessel General Arrangement (CAD)",
+      description: "A technical 2D CAD detailing the General Arrangement (GA) plan of a cargo vessel. The drawing includes comprehensive side views, deck layouts, hull profiles, cross-sections, and principal dimension tables for naval architecture design and ship construction planning.",
+      imageUrl: projectDrawing,
+      link: "https://abram-kaleb.github.io/rineji4/"
+    }
+  ];
 
   return (
-    <div className="mt-32 h-[400px] md:h-[500px] w-full flex overflow-hidden bg-black">
-      {projects.map((proj, index) => {
-        const isActive = index === activeIndex;
-
-        return (
-          <div
-            key={proj.id}
-            onClick={() => handleProjectClick(index)}
-            className={`relative h-full transition-[flex] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer overflow-hidden ${
-              isActive ? 'flex-[20] md:flex-[10] cursor-default' : 'flex-[1.5] md:flex-[0.15] min-w-[40px] md:min-w-[50px]'
-            } ${sideColors[index % sideColors.length]}`}
-          >
-            <div
-              className={`absolute inset-0 z-0 bg-cover bg-center transition-all duration-500 ${
-                isActive ? 'blur-0 scale-100 opacity-100' : 'blur-md scale-105 opacity-20'
-              }`}
-              style={{ backgroundImage: `url('${proj.image}')` }}
-            />
-
-            <div className={`absolute inset-0 z-10 bg-black/60 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-90'}`} />
-
-            <div
-              className={`relative z-20 h-full flex flex-col justify-center px-6 md:px-16 ${
-                isActive && isTextVisible
-                  ? 'opacity-100 translate-y-0 transition-all duration-300 ease-out'
-                  : 'opacity-0 pointer-events-none transition-none'
-              }`}
-            >
-              <T3 className="text-white block mb-2 tracking-[0.3em] md:tracking-[0.4em] uppercase font-black text-[9px] md:text-[11px]">
-                {proj.category}
-              </T3>
-
-              <H1 className="text-white max-w-2xl leading-[1.2] md:leading-[1.1] text-lg md:text-2xl mb-6 font-black italic uppercase tracking-tighter">
-                {proj.title}
-              </H1>
-
-              <button className="bg-[#F2E500] w-fit px-6 md:px-8 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300">
-                Learn More
-              </button>
-            </div>
-
-            <div className="absolute inset-0 z-30 flex flex-col items-center justify-between py-6 md:py-8 pointer-events-none">
-              <T3 className="text-white text-[11px] md:text-[13px] font-black tracking-tighter drop-shadow-lg opacity-100">
-                {proj.id}
-              </T3>
-
-              {!isActive && (
-                <>
-                  <span className="rotate-[-90deg] text-[8px] md:text-[9px] text-white whitespace-nowrap uppercase tracking-[0.2em] md:tracking-[0.3em] font-black">
-                    {proj.sideLabel}
-                  </span>
-                  <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-[#F2E500] rotate-45 shadow-[0_0_10px_rgba(242,229,0,1)]" />
-                </>
-              )}
-
-              {isActive && <div className="h-1 w-1 bg-transparent" />}
-            </div>
+    <section id="projects" className="bg-white md:py-16 py-10">
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+          {/* Kolom Kiri: Judul Section */}
+          <div className="md:col-span-3">
+            <h2 className="text-[#0066FF] text-xs md:text-sm font-bold uppercase tracking-widest pt-1">
+              FEATURED PROJECTS
+            </h2>
           </div>
-        );
-      })}
-    </div>
+
+          {/* Kolom Kanan: List Projects */}
+          <div className="md:col-span-9 space-y-16 md:space-y-24">
+            {projects.map((project) => (
+              <div 
+                key={project.id} 
+                className="grid grid-cols-1 md:grid-cols-9 gap-6 md:gap-8 items-center"
+              >
+                {/* Gambar Showcase Project */}
+                <div className="md:col-span-6">
+                  {project.link ? (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block overflow-hidden rounded group"
+                    >
+                      <img
+                        src={project.imageUrl}
+                        alt={project.title}
+                        className="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-300"
+                      />
+                    </a>
+                  ) : (
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="w-full h-auto object-contain"
+                    />
+                  )}
+                </div>
+
+                {/* Deskripsi Project di Samping Kanan Gambar */}
+                <div className="md:col-span-3 flex flex-col justify-center">
+                  <h3 className="text-base md:text-lg font-bold text-[#2D3748] mb-2 leading-snug">
+                    {project.link ? (
+                      <a 
+                        href={project.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-[#0066FF] transition-colors"
+                      >
+                        {project.title}
+                      </a>
+                    ) : (
+                      project.title
+                    )}
+                  </h3>
+                  <p className="text-[#718096] text-xs md:text-sm leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+
+                  {/* Section Link Tambahan */}
+                  {project.link && (
+                    <div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </section>
   );
 };
 
-export default Project;
+export default Projects;

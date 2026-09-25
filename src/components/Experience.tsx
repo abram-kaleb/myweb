@@ -1,70 +1,84 @@
 import React from 'react';
 import { Container } from './Layout';
-import { H1, T3 } from './Typography';
 
 const Experience = () => {
   const experiences = [
     {
-      date: "February 2026 - Now",
-      company: "Hochschule Wismar, Rostock",
-      role: "Lab Assistant"
+      date: "Jun 2026 - Present",
+      company: "Hochschule Wismar",
+      role: "Research Assistant",
+      url: "https://www.hs-wismar.de"
     },
     {
-      date: "August 2025 - October 2025",
-      company: "Noris Automation, Rostock",
-      role: "Test Bed Engineer (Internship)"
+      date: "Aug 2025 - Oct 2025",
+      company: "Noris Automation",
+      role: "Working Student",
+      url: "https://www.noris-group.com"
     },
     {
-      date: "November 2024 - December 2024",
-      company: "Amazon, Dummerstorf",
-      role: "Warehouse Management (Internship)"
+      date: "Jan 2023 - Apr 2023",
+      company: "Meratus Group",
+      role: "Engineering Assistant (Internship)",
+      url: "https://www.meratusline.com"
     },
     {
-      date: "January 2023 - February 2023",
-      company: "Meratus Group, Surabaya",
-      role: "Crewing Management (Internship)"
+      date: "Jan 2022 - Apr 2022",
+      company: "Soechi Lines",
+      role: "Project Engineer Assistant (Internship)",
+      url: "https://www.soechi.com"
     },
     {
-      date: "January 2022 - February 2022",
-      company: "Soechi Line, Jakarta",
-      role: "Project Engineer (Internship)"
-    },
-    {
-      date: "August 2021 - September 2021",
-      company: "PT.DKB, Jakarta",
-      role: "On The Job Training (Internship)"
+      date: "Jul 2021 - Sep 2021",
+      company: "Dok Kodja Bahari",
+      role: "On The Job Training (Internship)",
+      url: "https://dkb.co.id/"
     }
   ];
 
   return (
-    <section id="experience" className="bg-white py-20">
+    <section id="experience" className="bg-white py-12 md:py-20 px-4 md:px-0">
       <Container>
-        <H1 className="text-black text-3xl md:text-5xl font-black uppercase tracking-tighter mb-12">
-          Experience
-        </H1>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12">
+          {/* Kolom Kiri: Judul Section */}
+          <div className="md:col-span-3">
+            <h2 className="text-[#0066FF] text-xs md:text-sm font-bold uppercase tracking-widest pt-1">
+              EXPERIENCE
+            </h2>
+          </div>
 
-        <div className="space-y-6 md:space-y-4">
-          {experiences.map((exp, idx) => (
-            <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-0 items-baseline">
-              <div className="md:col-span-3">
-                <T3 className="text-gray-500 font-medium text-[11px] md:text-[12px] uppercase tracking-wide">
-                  {exp.date}
-                </T3>
-              </div>
+          {/* Kolom Kanan: List Pengalaman */}
+          <div className="md:col-span-9 space-y-6 md:space-y-8">
+            {experiences.map((exp, idx) => (
+              <div 
+                key={idx} 
+                className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-6"
+              >
+                {/* Perusahaan & Jabatan (Kiri/Atas) */}
+                <div className="space-y-1">
+                  <h3 className="text-base md:text-[17px] font-bold leading-snug">
+                    <a
+                      href={exp.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#2D3748] hover:text-[#0066FF] transition-colors duration-200"
+                    >
+                      {exp.company}
+                    </a>
+                  </h3>
+                  <p className="text-[#718096] text-sm md:text-[15px] font-normal">
+                    {exp.role}
+                  </p>
+                </div>
 
-              <div className="md:col-span-4">
-                <T3 className="text-black font-black text-[12px] md:text-[14px] uppercase tracking-tighter">
-                  {exp.company}
-                </T3>
+                {/* Tanggal / Periode (Kanan/Bawah di HP) */}
+                <div className="sm:text-right shrink-0">
+                  <span className="text-[#A0AEC0] text-xs md:text-sm font-medium tracking-wide font-mono">
+                    {exp.date}
+                  </span>
+                </div>
               </div>
-
-              <div className="md:col-span-5">
-                <T3 className="text-gray-600 font-medium text-[12px] md:text-[13px]">
-                  {exp.role}
-                </T3>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Container>
     </section>

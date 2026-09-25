@@ -1,26 +1,31 @@
 import React from 'react';
 import { Container } from './Layout';
-import { H1 } from './Typography';
 
 const AboutMe = () => {
   return (
-    <section id="about" className="bg-white py-24 md:py-32">
+    <section id="about" className="bg-white my-12 md:my-20 px-4 md:px-0 pt-20">
       <Container>
-        <div className="max-w-5xl">
-          {/* Nama Gede sesuai Gambar */}
-          <H1 className="text-black text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-10">
-            Abraham Kaleb Martua Manulang
-          </H1>
+        <div className="max-w-3xl">
+          {/* Sapaan Atas */}
+          <p className="text-gray-700 text-xl md:text-3xl font-normal mb-3">
+            Hello! 👋
+          </p>
 
-          {/* Deskripsi Minimalis */}
-          <div className="max-w-3xl">
-            <p className="text-gray-700 text-[13px] md:text-[15px] leading-relaxed font-medium">
-              I am a final-semester Master of Science student in Operation and Management of Maritime Systems, 
-              with a focus on Ship Technology. My specialization integrates engineering and technical management of ships, 
-              with particular interest in analysis, decision-making, and practical implementation. 
-              I am open to freelance and professional opportunities within this domain.
-            </p>
-          </div>
+          {/* Deskripsi Utama */}
+          <h1 className="text-gray-700 text-xl sm:text-2xl md:text-4xl leading-relaxed md:leading-relaxed font-normal tracking-tight">
+            I'm <span className="font-bold text-gray-900">Abraham</span>, a marine engineering and data science specialist combining expertise in marine systems, big data/AI analytics, and project management in the maritime industry
+          </h1>
+
+          {/* Kontak / Call to Action */}
+          <p className="text-gray-700 text-base md:text-lg font-normal pt-6 flex flex-wrap items-center gap-1">
+            <span>Get in touch 👉</span>{' '}
+            <a 
+              href="mailto:manulangabraham@gmail.com" 
+              className="text-gray-900 underline underline-offset-4 decoration-1 hover:text-black transition-colors break-all"
+            >
+              manulangabraham@gmail.com
+            </a>
+          </p>
         </div>
       </Container>
     </section>
